@@ -1,0 +1,49 @@
+[gd_scene load_steps=14 format=3 uid="uid://42mbvs6ywt82"]
+
+[ext_resource type="Texture2D" uid="uid://nvqbc6ytc5bq" path="res://icon.svg" id="1_w5hco"]
+[ext_resource type="Script" path="res://bullet.gd" id="2_gl5bk"]
+[ext_resource type="Script" path="res://res/bullet_instructions/bullet_rotation_instruction.gd" id="3_1tgto"]
+[ext_resource type="Script" path="res://res/bullet_instructions/set_alpha_instruction.gd" id="4_6wgke"]
+[ext_resource type="Script" path="res://res/bullet_instructions/tween_instructions/tween_vec2_instruction.gd" id="5_mvahy"]
+[ext_resource type="Script" path="res://res/bullet_instructions/queue_free_instruction.gd" id="6_6jsny"]
+
+[sub_resource type="Resource" id="Resource_fqte5"]
+script = ExtResource("3_1tgto")
+degree = 45.0
+
+[sub_resource type="Resource" id="Resource_4xhan"]
+script = ExtResource("4_6wgke")
+d_degree = 360.0
+
+[sub_resource type="Curve" id="Curve_0enu5"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_0hjll"]
+script = ExtResource("5_mvahy")
+property_name = "scale"
+value = Vector2(1.5, 1.5)
+duration = 1.0
+curve = SubResource("Curve_0enu5")
+parallel = false
+
+[sub_resource type="Curve" id="Curve_ew7xi"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ck56j"]
+script = ExtResource("5_mvahy")
+property_name = "velocity"
+value = Vector2(100, 1000)
+duration = 1.0
+curve = SubResource("Curve_ew7xi")
+parallel = false
+
+[sub_resource type="Resource" id="Resource_5amdj"]
+script = ExtResource("6_6jsny")
+
+[node name="Bullet" type="Sprite2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_w5hco")
+script = ExtResource("2_gl5bk")
+instructions = Array[Resource("res://res/bullet_instructions/res_bullet_instruction.gd")]([SubResource("Resource_fqte5"), SubResource("Resource_4xhan"), SubResource("Resource_0hjll"), SubResource("Resource_ck56j"), SubResource("Resource_5amdj")])
