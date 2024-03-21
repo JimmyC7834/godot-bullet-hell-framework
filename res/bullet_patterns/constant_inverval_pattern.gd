@@ -11,7 +11,7 @@ extends BulletSpawnPattern
 func get_bullet_sequence() -> Array:
     var arr = []
     if wait_on_first:
-        arr.append(interval)        
+        arr.append(interval)
     
     for b in bullets:
         arr.append(b)

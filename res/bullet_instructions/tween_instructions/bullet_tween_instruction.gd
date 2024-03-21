@@ -6,7 +6,8 @@ const DEFAULT_CURVE = preload("res://res/bullet_instructions/tween_instructions/
 @export var curve: Curve
 @export var parallel: bool
 
-func _ready():
+func register(b: Node2D):
+    super.register(b)
     if curve == null:
         curve = DEFAULT_CURVE.duplicate()
 

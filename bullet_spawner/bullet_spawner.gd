@@ -1,3 +1,4 @@
+## Base class for bullet spawners
 class_name BulletSpawner
 extends Node2D
 

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ConstantIntervalPattern" load_steps=3 format=3 uid="uid://bb6rfw4dplnhd"]
 
-[ext_resource type="PackedScene" uid="uid://42mbvs6ywt82" path="res://bullet.tscn" id="1_wu8fk"]
+[ext_resource type="PackedScene" uid="uid://bevtm1j6x6wdl" path="res://examples/bullets/example_rotating_bullet.tscn" id="1_e4re4"]
 [ext_resource type="Script" path="res://res/bullet_patterns/constant_inverval_pattern.gd" id="2_tqg0p"]
 
 [resource]
 script = ExtResource("2_tqg0p")
 interval = 1.0
 wait_on_first = false
-bullets = Array[PackedScene]([ExtResource("1_wu8fk"), ExtResource("1_wu8fk"), ExtResource("1_wu8fk")])
+bullets = Array[PackedScene]([ExtResource("1_e4re4")])

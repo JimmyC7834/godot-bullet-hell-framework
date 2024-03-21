@@ -3,9 +3,9 @@ class_name BulletInstruction
 extends Resource
 
 ## The bullet this instruction should act on
-var bullet: Bullet
+var bullet: Node2D
 
-func register(b: Bullet):
+func register(b: Node2D):
     bullet = b
     _init()
 
