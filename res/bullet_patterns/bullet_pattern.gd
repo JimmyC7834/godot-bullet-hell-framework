@@ -8,5 +8,5 @@ extends Resource
 ## Returns an [Array] of [float] and [PackedScene],
 ## each [PackedScene] is the bullet to be spawned, while each [float] is the interval
 ## Should be overrided to define the behaviour of this pattern
-func get_bullet_squence() -> Array:
+func get_bullet_sequence() -> Array:
     return bullets

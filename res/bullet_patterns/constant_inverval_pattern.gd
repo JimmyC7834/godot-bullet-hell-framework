@@ -8,7 +8,7 @@ extends BulletSpawnPattern
 ## If set to [param true], interval is added before the first shot
 @export var wait_on_first: bool
 
-func get_bullet_squence() -> Array:
+func get_bullet_sequence() -> Array:
     var arr = []
     if wait_on_first:
         arr.append(interval)        

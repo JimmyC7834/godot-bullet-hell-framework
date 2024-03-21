@@ -24,6 +24,7 @@ script = ExtResource("5_mvahy")
 property_name = "scale"
 value = Vector2(1.5, 1.5)
 duration = 1.0
+is_relative = false
 curve = SubResource("Curve_0enu5")
 parallel = false
 
@@ -36,6 +37,7 @@ script = ExtResource("5_mvahy")
 property_name = "velocity"
 value = Vector2(100, 1000)
 duration = 1.0
+is_relative = false
 curve = SubResource("Curve_ew7xi")
 parallel = false
 

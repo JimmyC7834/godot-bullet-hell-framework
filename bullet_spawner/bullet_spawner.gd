@@ -7,8 +7,8 @@ func trigger():
     pass
 
 ## Spawn bullets with pattern as defined [param spawn_pattern] at [param pos]
-func spawn_squence_at(pos: Vector2):
-    for i in spawn_pattern.get_bullet_squence():
+func spawn_sequence_at(pos: Vector2):
+    for i in spawn_pattern.get_bullet_sequence():
         if i is float:
             await get_tree().create_timer(i).timeout
         elif i is PackedScene:

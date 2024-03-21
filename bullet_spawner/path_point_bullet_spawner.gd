@@ -1,3 +1,4 @@
+## Spawn bullet sequence at each point on the [param path]
 class_name PathPointBulletSpawner
 extends BulletSpawner
 
@@ -15,7 +16,7 @@ func trigger():
         await get_tree().create_timer(interval).timeout
 
     for i in range(path.curve.point_count):
-        spawn_squence_at(path.curve.get_point_position(i))
+        spawn_sequence_at(path.curve.get_point_position(i))
         
         if interval > 0.0:
             await get_tree().create_timer(interval).timeout
