@@ -3,5 +3,5 @@ extends BulletInstruction
 
 @export var d_degree: float
 
-func effect():
+func _effect():
     bullet.alpha = deg_to_rad(d_degree)

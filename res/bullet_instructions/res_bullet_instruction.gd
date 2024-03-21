@@ -1,18 +1,24 @@
+## Base class for instrcution for bullet behaviour
 class_name BulletInstruction
 extends Resource
 
+## The bullet this instruction should act on
 var bullet: Bullet
-var wait: bool
 
-func _register(b: Bullet):
+func register(b: Bullet):
     bullet = b
-    register()
+    _init()
 
-func register():
+## Called after this intruction is registered
+## Similar to _init() of Node
+func _init():
     pass
 
-func _effect():
-    return effect()
-
 func effect():
+    return _effect()
+
+## Called when effect is executed
+## This method should returns a signal if this instruction is
+## meant to be awaited before executing the next instruction
+func _effect():
     pass

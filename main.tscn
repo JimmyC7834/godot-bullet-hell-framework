@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7wf3d2cdj3rf"]
+[gd_scene load_steps=7 format=3 uid="uid://c7wf3d2cdj3rf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_xqpej"]
+[ext_resource type="Script" path="res://path_point_bullet_spawner.gd" id="2_c3t2a"]
+[ext_resource type="PackedScene" uid="uid://42mbvs6ywt82" path="res://bullet.tscn" id="3_ps7su"]
+[ext_resource type="Script" path="res://res/constant_inverval_pattern.gd" id="4_8p2yf"]
 
-[node name="main" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_e1kvx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 352, 152, 0, 0, 0, 0, 440, 152, 0, 0, 0, 0, 528, 152)
+}
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_d83xc"]
+script = ExtResource("4_8p2yf")
+interval = 0.5
+wait_on_first = false
+bullets = Array[PackedScene]([ExtResource("3_ps7su"), ExtResource("3_ps7su"), ExtResource("3_ps7su")])
+
+[node name="main" type="Node2D" node_paths=PackedStringArray("spawner")]
 script = ExtResource("1_xqpej")
+spawner = NodePath("Path2D")
+
+[node name="Path2D" type="Path2D" parent="." node_paths=PackedStringArray("path")]
+curve = SubResource("Curve2D_e1kvx")
+script = ExtResource("2_c3t2a")
+interval = 1.0
+path = NodePath(".")
+spawn_pattern = SubResource("Resource_d83xc")

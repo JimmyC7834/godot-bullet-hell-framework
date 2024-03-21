@@ -10,7 +10,7 @@ func _ready():
     instructions = instructions.duplicate()
     for i in range(instructions.size()):
         instructions[i] = instructions[i].duplicate()
-        instructions[i]._register(self)
+        instructions[i].register(self)
 
     next_modifiers()
 

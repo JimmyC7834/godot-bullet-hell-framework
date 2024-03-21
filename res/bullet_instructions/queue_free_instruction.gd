@@ -1,5 +1,5 @@
 class_name QueueFreeInstruction
 extends BulletInstruction
 
-func effect():
+func _effect():
     bullet.queue_free()
