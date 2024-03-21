@@ -1,7 +1,5 @@
 extends Node2D
 
-const BULLET = preload("res://bullet.tscn")
-
 @export var spawner: BulletSpawner
 
 func _process(delta):

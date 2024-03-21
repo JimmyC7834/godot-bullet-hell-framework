@@ -1,6 +1,6 @@
 ## Base class for instrcution for bullet behaviour
 class_name BulletInstruction
-extends Resource
+extends Node
 
 ## The bullet this instruction should act on
 var bullet: Node2D

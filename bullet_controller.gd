@@ -1,9 +1,6 @@
 ## Takes in instructions and execute them on the [param subject]
-class_name Bullet
+class_name BulletController
 extends Node2D
-
-## The Node the instructions is executed on
-@export var subject: Node2D = self
 
 @export_group("Bullet Properties")
 ## Velocity of the bullet, will be rotated to [param direction]
@@ -15,21 +12,22 @@ extends Node2D
 ## The angular velocity of the bullet
 @export var alpha: float
 
-@export_group("Bullet Behaviour")
-## Instructions of the bullet's behaviour
-@export var instructions: Array[BulletInstruction] = []
+var instructions: Array[BulletInstruction] = []
 
 func _ready():
-    instructions = instructions.duplicate()
-    for i in range(instructions.size()):
-        instructions[i] = instructions[i].duplicate()
-        instructions[i].register(subject)
+    var children = get_children()
+    while not children.is_empty():
+        var c = children.pop_front()
+        if c is BulletInstruction:
+            c.register(self)
+            instructions.append(c)
+        children.append_array(c.get_children())
 
     execute_instruction_batch()
 
 func _process(delta):
-    subject.global_position += velocity.rotated(direction_degree) * delta
-    subject.rotate(alpha * delta)
+    global_position += velocity.rotated(direction_degree) * delta
+    rotate(alpha * delta)
 
 func execute_instruction_batch():
     var i: BulletInstruction = instructions.pop_front()

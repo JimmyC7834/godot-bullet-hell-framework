@@ -1,21 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7wf3d2cdj3rf"]
+[gd_scene load_steps=8 format=3 uid="uid://c7wf3d2cdj3rf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_xqpej"]
 [ext_resource type="Script" path="res://bullet_spawner/path_point_bullet_spawner.gd" id="2_83c8i"]
-[ext_resource type="Resource" uid="uid://bb6rfw4dplnhd" path="res://res/bullet_patterns/res/debug_constant_interval_pattern.tres" id="3_ky5ag"]
+[ext_resource type="PackedScene" uid="uid://42mbvs6ywt82" path="res://examples/bullets/bullet.tscn" id="3_curi3"]
+[ext_resource type="Script" path="res://res/bullet_patterns/constant_inverval_pattern.gd" id="3_jfmg6"]
 
 [sub_resource type="Curve2D" id="Curve2D_e1kvx"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 352, 152, 0, 0, 0, 0, 440, 152, 0, 0, 0, 0, 528, 152)
+"points": PackedVector2Array(0, 0, 0, 0, 272, 256, 0, 0, 0, 0, 312, 192, 0, 0, 0, 0, 384, 136, 0, 0, 0, 0, 496, 112, 0, 0, 0, 0, 592, 128, 0, 0, 0, 0, 664, 184, 0, 0, 0, 0, 712, 248)
 }
-point_count = 3
+point_count = 7
+
+[sub_resource type="Resource" id="Resource_vvqu6"]
+script = ExtResource("3_jfmg6")
+interval = 0.5
+wait_on_first = false
+bullets = Array[PackedScene]([ExtResource("3_curi3"), ExtResource("3_curi3"), ExtResource("3_curi3")])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5foo"]
+size = Vector2(1170, 42)
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("spawner")]
 script = ExtResource("1_xqpej")
 spawner = NodePath("Path2D")
 
 [node name="Path2D" type="Path2D" parent="." node_paths=PackedStringArray("path")]
+position = Vector2(80, -64)
 curve = SubResource("Curve2D_e1kvx")
 script = ExtResource("2_83c8i")
+interval = 0.15
 path = NodePath(".")
-spawn_pattern = ExtResource("3_ky5ag")
+spawn_pattern = SubResource("Resource_vvqu6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(584, 624)
+shape = SubResource("RectangleShape2D_c5foo")
