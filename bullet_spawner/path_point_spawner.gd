@@ -1,6 +1,6 @@
-## Spawn bullet sequence at each point on the [param path]
+## Spawn insts sequence at each point on the [param path]
 class_name PathPointSpawner
-extends BulletSpawner
+extends CustomSpawner
 
 ## Interval for spawning bullets on each points on the path
 @export_range(0.0, 60.0) var interval: float

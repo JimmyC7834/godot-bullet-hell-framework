@@ -1,7 +1,7 @@
 class_name SetAlphaInstruction
-extends BulletInstruction
+extends NodeInstruction
 
 @export var d_degree: float
 
 func _effect():
-    bullet.alpha = deg_to_rad(d_degree)
+    node.alpha = deg_to_rad(d_degree)

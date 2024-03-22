@@ -1,6 +1,6 @@
 ## Tween a vector 2 property of the bullet
 class_name TweenVec2Instruction
-extends BulletTweenInstruction
+extends PropertyTweenInstruction
 
 ## The property name to be tweened
 @export var property_name: String
@@ -15,10 +15,10 @@ extends BulletTweenInstruction
 @export var is_relative: bool = false
  
 func _effect():
-    var t = bullet.create_tween().parallel()
+    var t = node.create_tween().parallel()
     if is_relative:
-        value += bullet._get(property_name)
-    t = interpolate_curve_property(t, curve, bullet, property_name, value, duration)
+        value += node.get(property_name)
+    t = interpolate_curve_property(t, curve, node, property_name, value, duration)
     
     if !parallel:
         return t.finished

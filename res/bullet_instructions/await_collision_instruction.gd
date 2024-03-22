@@ -1,5 +1,5 @@
 class_name AwaitCollisionInstruction
-extends BulletInstruction
+extends NodeInstruction
 
 @export var area: Area2D
 @export_enum(&"AREA_ENTER", &"BODY_ENTER", &"AREA_SAHPE_ENTER", &"BODY_SAHPE_ENTER")

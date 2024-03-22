@@ -1,7 +1,7 @@
 class_name DelayInstruction
-extends BulletInstruction
+extends NodeInstruction
 
 @export var time: float
 
 func _effect():
-    return bullet.get_tree().create_timer(time).timeout
+    return node.get_tree().create_timer(time).timeout

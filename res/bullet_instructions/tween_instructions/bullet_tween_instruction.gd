@@ -1,5 +1,5 @@
-class_name BulletTweenInstruction
-extends BulletInstruction
+class_name PropertyTweenInstruction
+extends NodeInstruction
 
 const DEFAULT_CURVE = preload("res://res/bullet_instructions/tween_instructions/default_curve.tres")
 

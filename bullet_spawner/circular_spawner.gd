@@ -1,7 +1,7 @@
 @tool
-## Spawn a bullet squence at [param global_position] 
+## Spawn inst squences in a circular shape, apply rotation 
 class_name CircularSpawner
-extends BulletSpawner
+extends CustomSpawner
 
 @export_range(0, 90) var point_count: int
 @export_range(0, 360) var degree: int
@@ -15,8 +15,9 @@ func _ready():
 
 func trigger():
     for p in spawn_points:
-        spawn_sequence(global_position + p.rotated(global_rotation), p.angle() + rotation)
-        #print(rad_to_deg(p.angle() + rotation))
+        spawn_sequence(global_position + p.rotated(global_rotation),
+            func(b):
+                b.global_rotation = p.angle() + rotation)
     
 func calculate_spawn_points():
     spawn_points.clear()

@@ -1,7 +1,7 @@
-class_name BulletRotationInstruction
-extends BulletInstruction
+class_name RotationInstruction
+extends NodeInstruction
 
 @export var degree: float
 
 func _effect():
-    bullet.rotation = deg_to_rad(degree)
+    node.rotation = deg_to_rad(degree)

@@ -1,12 +1,12 @@
-## Base class for instrcution for bullet behaviour
-class_name BulletInstruction
+## Base class for instrcution for node behaviour
+class_name NodeInstruction
 extends Node
 
 ## The bullet this instruction should act on
-var bullet: Node2D
+var node: Node2D
 
-func register(b: Node2D):
-    bullet = b
+func register(n: Node2D):
+    node = n
     _init()
 
 ## Called after this intruction is registered

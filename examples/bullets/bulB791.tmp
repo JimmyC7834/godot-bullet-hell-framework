@@ -19,6 +19,9 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_engiy")
 script = ExtResource("2_mwk2i")
 speed = 200.0
+direction_degree = null
+alpha = null
+reset_direction = null
 
 [node name="Area2D" type="Area2D" parent="."]
 

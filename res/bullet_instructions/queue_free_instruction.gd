@@ -1,5 +1,5 @@
 class_name QueueFreeInstruction
-extends BulletInstruction
+extends NodeInstruction
 
 func _effect():
-    bullet.queue_free()
+    node.queue_free()

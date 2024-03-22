@@ -1,8 +1,8 @@
-## Spawn pattern that spawns bullets on a constant interval
+## Spawn pattern that spawns insts on a constant interval
 class_name ConstantIntervalPattern
-extends BulletSpawnPattern
+extends InstSpawnPattern
 
-## Interval for spawning bullets
+## Interval for spawning insts
 @export_range(0.0, 60.0) var interval: float
 
 ## If set to [param true], interval is added before the first shot
@@ -13,8 +13,8 @@ func get_bullet_sequence() -> Array:
     if wait_on_first:
         arr.append(interval)
     
-    for b in bullets:
-        arr.append(b)
+    for s in scenes:
+        arr.append(s)
         arr.append(interval)
 
     return arr

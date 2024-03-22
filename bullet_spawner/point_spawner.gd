@@ -1,6 +1,8 @@
-## Spawn a bullet squence at [param global_position] 
+## Spawn a inst squence at [param global_position], apply rotation
 class_name PointSpawner
-extends BulletSpawner
+extends CustomSpawner
 
 func trigger():
-    spawn_sequence(global_position, global_rotation)
+    spawn_sequence(global_position,
+        func(b):
+            b.global_rotation = global_rotation)
