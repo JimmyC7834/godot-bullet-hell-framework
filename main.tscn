@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7wf3d2cdj3rf"]
+[gd_scene load_steps=10 format=3 uid="uid://c7wf3d2cdj3rf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_xqpej"]
-[ext_resource type="Script" path="res://bullet_spawner/path_point_bullet_spawner.gd" id="2_83c8i"]
+[ext_resource type="Script" path="res://bullet_spawner/path_point_spawner.gd" id="2_83c8i"]
 [ext_resource type="PackedScene" uid="uid://42mbvs6ywt82" path="res://examples/bullets/bullet.tscn" id="3_curi3"]
 [ext_resource type="Script" path="res://res/bullet_patterns/constant_inverval_pattern.gd" id="3_jfmg6"]
+[ext_resource type="Script" path="res://bullet_spawner/circular_spawner.gd" id="5_bj8o7"]
 
 [sub_resource type="Curve2D" id="Curve2D_e1kvx"]
 _data = {
@@ -20,15 +21,21 @@ bullets = Array[PackedScene]([ExtResource("3_curi3"), ExtResource("3_curi3"), Ex
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5foo"]
 size = Vector2(1170, 42)
 
+[sub_resource type="Resource" id="Resource_fu1sw"]
+script = ExtResource("3_jfmg6")
+interval = 0.0
+wait_on_first = false
+bullets = Array[PackedScene]([ExtResource("3_curi3")])
+
 [node name="main" type="Node2D" node_paths=PackedStringArray("spawner")]
 script = ExtResource("1_xqpej")
-spawner = NodePath("Path2D")
+spawner = NodePath("CircularSpawner")
 
 [node name="Path2D" type="Path2D" parent="." node_paths=PackedStringArray("path")]
-position = Vector2(80, -64)
+position = Vector2(896, -280)
+rotation = 1.0472
 curve = SubResource("Curve2D_e1kvx")
 script = ExtResource("2_83c8i")
-interval = 0.15
 path = NodePath(".")
 spawn_pattern = SubResource("Resource_vvqu6")
 
@@ -37,3 +44,12 @@ spawn_pattern = SubResource("Resource_vvqu6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(584, 624)
 shape = SubResource("RectangleShape2D_c5foo")
+
+[node name="CircularSpawner" type="Node2D" parent="."]
+position = Vector2(576, 256)
+rotation = 1.1589
+script = ExtResource("5_bj8o7")
+point_count = 6
+degree = 360
+radius = 50
+spawn_pattern = SubResource("Resource_fu1sw")
