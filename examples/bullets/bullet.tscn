@@ -2,45 +2,50 @@
 
 [ext_resource type="Texture2D" uid="uid://nvqbc6ytc5bq" path="res://icon.svg" id="1_engiy"]
 [ext_resource type="Script" path="res://bullet_controller.gd" id="2_mwk2i"]
-[ext_resource type="Script" path="res://res/bullet_instructions/delay_instruction.gd" id="4_1eudv"]
+[ext_resource type="Shape2D" uid="uid://b331lnig6l7sh" path="res://examples/bullets/bullet_hitbox.tres" id="3_qc0ab"]
 [ext_resource type="Script" path="res://res/bullet_instructions/tween_instructions/tween_float_instruction.gd" id="4_32q31"]
 [ext_resource type="Script" path="res://res/bullet_instructions/set_alpha_instruction.gd" id="4_ad5sk"]
-[ext_resource type="Script" path="res://res/bullet_instructions/queue_free_instruction.gd" id="6_3sone"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_iutfp"]
-radius = 64.0
+[ext_resource type="Script" path="res://res/bullet_instructions/await_collision_instruction.gd" id="6_hptod"]
+[ext_resource type="Script" path="res://res/bullet_instructions/queue_free_instruction.gd" id="7_ibtsn"]
 
 [sub_resource type="Curve" id="Curve_b0nci"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Bullet" type="Sprite2D"]
+[node name="Bullet" type="Node2D"]
+light_mask = 0
+script = ExtResource("2_mwk2i")
+speed = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_engiy")
-script = ExtResource("2_mwk2i")
-speed = 200.0
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+input_pickable = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_iutfp")
+shape = ExtResource("3_qc0ab")
 
 [node name="Instructions" type="Node" parent="."]
 
 [node name="SetAlphaInstruction" type="Node" parent="Instructions"]
 script = ExtResource("4_ad5sk")
+d_degree = 360.0
 
 [node name="TweenFloatInstruction" type="Node" parent="Instructions"]
 script = ExtResource("4_32q31")
 property_name = "direction_degree"
-value = 90.0
+value = 360.0
 is_relative = true
 curve = SubResource("Curve_b0nci")
 parallel = true
 
-[node name="DelayInstruction" type="Node" parent="Instructions"]
-script = ExtResource("4_1eudv")
-time = 2.0
+[node name="AwaitCollisionInstruction" type="Node" parent="Instructions" node_paths=PackedStringArray("area")]
+script = ExtResource("6_hptod")
+area = NodePath("../../Area2D")
 
-[node name="QueueFreeInstruction" type="Node" parent="Instructions"]
-script = ExtResource("6_3sone")
+[node name="QueueFreeInstruction" type="Node" parent="Instructions/AwaitCollisionInstruction"]
+script = ExtResource("7_ibtsn")

@@ -17,6 +17,6 @@ func trigger():
 
     for i in range(path.curve.point_count):
         spawn_sequence(path.curve.get_point_position(i))
-        
+
         if interval > 0.0:
             await get_tree().create_timer(interval).timeout

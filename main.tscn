@@ -1,22 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7wf3d2cdj3rf"]
+[gd_scene load_steps=11 format=3 uid="uid://c7wf3d2cdj3rf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_xqpej"]
 [ext_resource type="Script" path="res://bullet_spawner/path_point_spawner.gd" id="2_83c8i"]
 [ext_resource type="PackedScene" uid="uid://42mbvs6ywt82" path="res://examples/bullets/bullet.tscn" id="3_curi3"]
 [ext_resource type="Script" path="res://res/bullet_patterns/constant_inverval_pattern.gd" id="3_jfmg6"]
 [ext_resource type="Script" path="res://bullet_spawner/circular_spawner.gd" id="5_bj8o7"]
+[ext_resource type="Script" path="res://free_area.gd" id="5_xvlmp"]
 
 [sub_resource type="Curve2D" id="Curve2D_e1kvx"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 272, 256, 0, 0, 0, 0, 312, 192, 0, 0, 0, 0, 384, 136, 0, 0, 0, 0, 496, 112, 0, 0, 0, 0, 592, 128, 0, 0, 0, 0, 664, 184, 0, 0, 0, 0, 712, 248)
+"points": PackedVector2Array(0, 0, 0, 0, 272, 256, 0, 0, 0, 0, 312, 192, -49.8072, 22.0515, 49.8072, -22.0515, 384, 136, 0, 0, 0, 0, 496, 112, -36.3646, -15.5023, 36.3646, 15.5023, 592, 128, 0, 0, 0, 0, 664, 184, 0, 0, 0, 0, 712, 248)
 }
 point_count = 7
 
 [sub_resource type="Resource" id="Resource_vvqu6"]
 script = ExtResource("3_jfmg6")
-interval = 0.5
+interval = 0.0
 wait_on_first = false
-scenes = Array[PackedScene]([])
+scenes = Array[PackedScene]([ExtResource("3_curi3")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5foo"]
 size = Vector2(1170, 42)
@@ -40,16 +41,19 @@ path = NodePath(".")
 spawn_pattern = SubResource("Resource_vvqu6")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_xvlmp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(584, 624)
 shape = SubResource("RectangleShape2D_c5foo")
 
 [node name="CircularSpawner" type="Node2D" parent="."]
+visible = false
 position = Vector2(576, 256)
-rotation = 1.1589
 script = ExtResource("5_bj8o7")
-point_count = 60
+point_count = 180
 degree = 360
 radius = 50
 spawn_pattern = SubResource("Resource_fu1sw")
