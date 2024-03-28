@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BulletRes" load_steps=2 format=3 uid="uid://dovxnr1yl2fdx"]
+
+[ext_resource type="Script" path="res://res/res_bullet.gd" id="1_08lbm"]
+
+[resource]
+script = ExtResource("1_08lbm")
+tween_func = ""

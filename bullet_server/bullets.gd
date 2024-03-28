@@ -34,14 +34,12 @@ func _process(delta: float) -> void:
         )
         
         # Move the Bullet
-        bullet.current_position += offset
-        used_transform.origin = bullet.current_position
+        bullet.transform.origin += offset
         PhysicsServer2D.area_set_shape_transform(
-            shared_area, i, used_transform)
+            shared_area, i, bullet.transform)
         
         RenderingServer.canvas_item_set_transform(
-            bullet.tex_id, PhysicsServer2D.area_get_shape_transform(
-            shared_area, i))
+            bullet.tex_id, bullet.transform)
         
         # Add the delta to the bullet's lifetime
         bullet.lifetime += delta
@@ -52,7 +50,7 @@ func spawn_bullet(origin: Vector2, i_movement: Vector2, speed: float) -> void:
     var bullet : Bullet = Bullet.new()
     bullet.movement_vector = i_movement
     bullet.speed = speed
-    bullet.current_position = origin
+    bullet.transform = Transform2D(0, origin)
 
     # Configure its collision
     _configure_collision_for_bullet(bullet)
@@ -64,30 +62,37 @@ func spawn_bullet(origin: Vector2, i_movement: Vector2, speed: float) -> void:
 
     # Register to the array
     bullets.append(bullet)
+    call("tween_bullet", bullet)
 
 func remove_bullet(idx: int):
     PhysicsServer2D.area_set_shape_disabled.bind(shared_area, idx, true).call_deferred()
     RenderingServer.canvas_item_clear(bullets[idx].tex_id)
 
-func _configure_collision_for_bullet(bullet: Bullet) -> void:
-    # Step 1
-    var used_transform := Transform2D(0, bullet.current_position)
-    used_transform.origin = bullet.current_position
-        
-    # Step 2
+func _configure_collision_for_bullet(bullet: Bullet) -> void:   
     var _circle_shape = PhysicsServer2D.circle_shape_create()
     PhysicsServer2D.shape_set_data(_circle_shape, 8)
     # Add the shape to the shared area
     PhysicsServer2D.area_add_shape(
-        shared_area, _circle_shape, used_transform)
+        shared_area, _circle_shape, bullet.transform)
 
-    # Step 3
     bullet.shape_id = _circle_shape
+
+func tween_bullet(b: Bullet):
+    b.tween_instruction(create_tween())
 
 class Bullet:
     var movement_vector: Vector2
     var speed: float
-    var current_position: Vector2
+    var transform: Transform2D
     var lifetime: float
+
     var shape_id: RID
     var tex_id: RID
+    
+    func tween_instruction(t: Tween):
+        t.set_parallel()
+        t.tween_property(self, "speed", 500, 1)
+        t.tween_property(self, "movement_vector", Vector2.DOWN, 1)
+        t.chain()
+        t.tween_property(self, "speed", 100, 1)
+        return t
